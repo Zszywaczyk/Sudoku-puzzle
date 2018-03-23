@@ -1,0 +1,11 @@
+D:\marcin\Documents\Informatyka\Dydaktyka\Materiały\Wstęp do Sztucznej Inteligencji\Dla studentów\Laboratory1\src\Laboratory1\bin\Debug\Laboratory1.exe
+D:\marcin\Documents\Informatyka\Dydaktyka\Materiały\Wstęp do Sztucznej Inteligencji\Dla studentów\Laboratory1\src\Laboratory1\bin\Debug\Laboratory1.pdb
+D:\marcin\Documents\Informatyka\Dydaktyka\Materiały\Wstęp do Sztucznej Inteligencji\Dla studentów\Laboratory1\src\Laboratory1\obj\Debug\Laboratory1.csprojResolveAssemblyReference.cache
+D:\marcin\Documents\Informatyka\Dydaktyka\Materiały\Wstęp do Sztucznej Inteligencji\Dla studentów\Laboratory1\src\Laboratory1\obj\Debug\Laboratory1.exe
+D:\marcin\Documents\Informatyka\Dydaktyka\Materiały\Wstęp do Sztucznej Inteligencji\Dla studentów\Laboratory1\src\Laboratory1\obj\Debug\Laboratory1.pdb
+C:\Users\Trsh\Desktop\studia\ZADANIA\x0e. WDSI\Lab1\Laboratory1\src\Laboratory1\bin\Debug\Laboratory1.exe
+C:\Users\Trsh\Desktop\studia\ZADANIA\x0e. WDSI\Lab1\Laboratory1\src\Laboratory1\bin\Debug\Laboratory1.pdb
+C:\Users\Trsh\Desktop\studia\ZADANIA\x0e. WDSI\Lab1\Laboratory1\src\Laboratory1\obj\Debug\Laboratory1.csprojResolveAssemblyReference.cache
+C:\Users\Trsh\Desktop\studia\ZADANIA\x0e. WDSI\Lab1\Laboratory1\src\Laboratory1\obj\Debug\Laboratory1.exe
+C:\Users\Trsh\Desktop\studia\ZADANIA\x0e. WDSI\Lab1\Laboratory1\src\Laboratory1\obj\Debug\Laboratory1.pdb
+C:\Users\Trsh\Desktop\studia\ZADANIA\x0e. WDSI\Lab1\Laboratory1\src\Laboratory1\obj\Debug\Laboratory1.csproj.CoreCompileInputs.cache
