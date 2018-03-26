@@ -132,22 +132,6 @@ namespace Laboratory1
         public void Print() {
             string boardStates = this.id.Replace("0", " ");
 
-            /* GRID SIZE = 9
-             *
-             * 1 2 3 | 4 5 6 | 7 8 9 
-             * 1 2 3 | 4 5 6 | 7 8 9
-             * 1 2 3 | 4 5 6 | 7 8 9
-             * 
-             * 1 2 3 | 4 5 6 | 7 8 9 
-             * 1 2 3 | 4 5 6 | 7 8 9
-             * 1 2 3 | 4 5 6 | 7 8 9
-             * 
-             * 1 2 3 | 4 5 6 | 7 8 9 
-             * 1 2 3 | 4 5 6 | 7 8 9
-             * 1 2 3 | 4 5 6 | 7 8 9
-             * 
-             */
-
             string output = "";
             for (int i = 0; i < GRID_SIZE; i++)
             {
@@ -177,8 +161,5 @@ namespace Laboratory1
         }
 
         #endregion
-
-
-
     }
 }

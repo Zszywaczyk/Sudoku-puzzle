@@ -10,11 +10,12 @@ namespace Laboratory1 {
     class Program {
         static void Main(string[] args) {
 			Console.BufferHeight = 1000;
-
             string SudokuPattern = "800030000930007000071520900005010620000050000046080300009076850060100032000040006";
 
+            bool UseAdvancedSearch = false;
+
             SudokuState startState = new SudokuState(SudokuPattern);
-            SudokuSearch searcher = new SudokuSearch(startState);
+            SudokuSearch searcher = new SudokuSearch(startState, UseAdvancedSearch);
 
             searcher.DoSearch();
 
@@ -33,8 +34,12 @@ namespace Laboratory1 {
             {
                 s.Print();
             }
+            string[] heuristicType = { "Simple", "Advanced" };
 
-            Console.Write("Steps count: " + solutionPath.Count);
+
+            string data = string.Format("{0} heuristic: \nSteps: {1}, \ncreated {2} board objects", 
+                heuristicType[UseAdvancedSearch ? 0 : 1], solutionPath.Count, SudokuState.counter);
+            Console.Write(data);
 
             Console.ReadKey();
 
