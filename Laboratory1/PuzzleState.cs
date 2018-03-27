@@ -13,12 +13,12 @@ namespace Laboratory1
         public readonly int GRIDSIZE;
         private int[,] Table;
         private int mixMoveCounter;
-
         private bool useMH; // Manhattan Heuristc
 
         public int[] emptyFieldPosition = { 0, 0 };
-        //  0   1    2    3 
         public bool[] Directions_LTRB = new bool[4]; // Left-Top-Right-Bot
+
+        public static int counter = 0;
 
         public PuzzleState(int gridSize, bool useManhattan = false, int mixMoves = 1000) : base()
         {
@@ -43,6 +43,8 @@ namespace Laboratory1
 
         public PuzzleState(PuzzleState parent, int dir) : base(parent)
         {
+            counter++;
+
             GRIDSIZE = parent.GRIDSIZE;
             Table = new int[GRIDSIZE, GRIDSIZE];
             Array.Copy(parent.Table, this.Table, this.Table.Length);
@@ -88,8 +90,32 @@ namespace Laboratory1
 
         private double manhattanH()
         {
+            double hs = 0.0;
+            for (int i = 0; i < GRIDSIZE; i++)
+            {
+                for (int j = 0; j < GRIDSIZE; j++)
+                {
+                    int correctValue = ((i * GRIDSIZE) + j);
+                    if (Table[i, j] != correctValue)
+                    {
+                        hs += computeDistance(Table[i, j], correctValue);
+                    }
+                }
+            }
 
-            return 0.0;
+            return hs;
+        }
+
+        private double computeDistance(int currentValue, int shouldBeValue)
+        {
+            int cIdx = shouldBeValue / GRIDSIZE;
+            int cIdy = shouldBeValue % GRIDSIZE;
+
+            int destIdx = currentValue / GRIDSIZE;
+            int destIdy = currentValue % GRIDSIZE;
+
+            double dist = Math.Abs(cIdx - destIdx) + Math.Abs(cIdy - destIdy);
+            return dist; 
         }
 
         public void Print()

@@ -103,28 +103,54 @@ namespace Laboratory1 {
 
 		static void puzzle()
 		{
+            bool useManhattan = true;
 
-            PuzzleState startState = new PuzzleState(3);
-            PuzzleSearch searcher = new PuzzleSearch(startState);
+            int openAverage = 0;
+            int closeAverage = 0;
+            int objectsAverage = 0;
 
-            searcher.DoSearch();
-
-            IState state = searcher.Solutions[0];
-            List<PuzzleState> solutionPath = new List<PuzzleState>();
-
-            while (state != null)
+            int numOfRandomBoards = 100;
+            for (int i = 0; i < numOfRandomBoards; i++)
             {
-                solutionPath.Add((PuzzleState)state);
-                state = state.Parent;
+                PuzzleState startState = new PuzzleState(3, useManhattan);
+                PuzzleSearch searcher = new PuzzleSearch(startState);
+
+                searcher.DoSearch();
+
+                IState state = searcher.Solutions[0];
+                List<PuzzleState> solutionPath = new List<PuzzleState>();
+
+                int openCounter = 0;
+                while (state != null)
+                {
+                    openCounter += state.Children.Count;
+
+                    solutionPath.Add((PuzzleState)state);
+                    state = state.Parent;
+                }
+
+                openAverage += openCounter;
+                closeAverage += solutionPath.Count;
+
+                objectsAverage += PuzzleState.counter;
+                PuzzleState.counter = 0;
+
+                solutionPath = null;
+                startState = null;
+                searcher = null;
             }
-            solutionPath.Reverse();
+            openAverage /= numOfRandomBoards;
+            closeAverage /= numOfRandomBoards;
+            objectsAverage /= numOfRandomBoards;
 
 
-            foreach (PuzzleState s in solutionPath)
-            {
-                s.Print();
-            }
+            string[] methods = { "Missplaced tiles", "Manhattan" };
 
+            StringBuilder datas = new StringBuilder();
+            datas.Append(String.Format("{0}\n", useManhattan == false ? methods[0] : methods[1]));
+            datas.Append(String.Format("Openned: {0}, Closed: {1} \nCreated {2} boards objects\n", openAverage, closeAverage, objectsAverage));
+
+            Console.Write(datas);
         }
     }
 }

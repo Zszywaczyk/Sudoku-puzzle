@@ -26,7 +26,6 @@ namespace Laboratory1
                     parent.Children.Add(child);
                 }
             }
-            //return;
         }
 
         protected override bool isSolution(IState state)
