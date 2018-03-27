@@ -14,3 +14,9 @@ C:\Users\lukas\OneDrive\Dokumenty\Visual Studio 2015\Projects\WDSI - Lab 1\Sudok
 C:\Users\lukas\OneDrive\Dokumenty\Visual Studio 2015\Projects\WDSI - Lab 1\Sudoku-puzzle\Laboratory1\bin\Debug\Laboratory1.exe
 C:\Users\lukas\OneDrive\Dokumenty\Visual Studio 2015\Projects\WDSI - Lab 1\Sudoku-puzzle\Laboratory1\bin\Debug\Laboratory1.pdb
 C:\Users\lukas\OneDrive\Dokumenty\Visual Studio 2015\Projects\WDSI - Lab 1\Sudoku-puzzle\Laboratory1\obj\Debug\Laboratory1.csprojResolveAssemblyReference.cache
+C:\Users\Trsh\Desktop\studia\ZADANIA\x0e. WDSI\Lab1\Lab1\Laboratory1\bin\Debug\Laboratory1.exe
+C:\Users\Trsh\Desktop\studia\ZADANIA\x0e. WDSI\Lab1\Lab1\Laboratory1\bin\Debug\Laboratory1.pdb
+C:\Users\Trsh\Desktop\studia\ZADANIA\x0e. WDSI\Lab1\Lab1\Laboratory1\obj\Debug\Laboratory1.csprojResolveAssemblyReference.cache
+C:\Users\Trsh\Desktop\studia\ZADANIA\x0e. WDSI\Lab1\Lab1\Laboratory1\obj\Debug\Laboratory1.csproj.CoreCompileInputs.cache
+C:\Users\Trsh\Desktop\studia\ZADANIA\x0e. WDSI\Lab1\Lab1\Laboratory1\obj\Debug\Laboratory1.exe
+C:\Users\Trsh\Desktop\studia\ZADANIA\x0e. WDSI\Lab1\Lab1\Laboratory1\obj\Debug\Laboratory1.pdb

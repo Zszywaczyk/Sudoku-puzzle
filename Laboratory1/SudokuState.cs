@@ -12,6 +12,7 @@ namespace Laboratory1
         public const int SMALL_GRID_SIZE = 3;
         public const int GRID_SIZE = SMALL_GRID_SIZE * SMALL_GRID_SIZE;
         public static int counter = 0;
+		public static bool slowdown = false;
         #endregion
 
 
@@ -140,6 +141,11 @@ namespace Laboratory1
             }
 
             Console.Write(output + "\n");
+			if (slowdown == true)
+			{
+				Console.ReadKey();
+				Console.Clear();
+			}
 		}
 
         private string getRowFormated(int rowID)
