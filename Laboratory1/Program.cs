@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 
 namespace Laboratory1 {
     class Program {
@@ -110,10 +111,17 @@ namespace Laboratory1 {
             int objectsAverage = 0;
 
             int numOfRandomBoards = 100;
+
+            PuzzleState startState;
+            PuzzleSearch searcher;
+
+            var stopwatch = new Stopwatch();
+
+            stopwatch.Start();
             for (int i = 0; i < numOfRandomBoards; i++)
             {
-                PuzzleState startState = new PuzzleState(3, useManhattan);
-                PuzzleSearch searcher = new PuzzleSearch(startState);
+                startState = new PuzzleState(3, useManhattan);
+                searcher = new PuzzleSearch(startState);
 
                 searcher.DoSearch();
 
@@ -139,6 +147,9 @@ namespace Laboratory1 {
                 startState = null;
                 searcher = null;
             }
+            stopwatch.Stop();
+            var elapsedTime = stopwatch.ElapsedMilliseconds;
+
             openAverage /= numOfRandomBoards;
             closeAverage /= numOfRandomBoards;
             objectsAverage /= numOfRandomBoards;
@@ -149,6 +160,7 @@ namespace Laboratory1 {
             StringBuilder datas = new StringBuilder();
             datas.Append(String.Format("{0}\n", useManhattan == false ? methods[0] : methods[1]));
             datas.Append(String.Format("Openned: {0}, Closed: {1} \nCreated {2} boards objects\n", openAverage, closeAverage, objectsAverage));
+            datas.Append(String.Format("Elapsed time: {0}\n", elapsedTime));
 
             Console.Write(datas);
         }
