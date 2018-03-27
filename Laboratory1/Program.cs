@@ -15,7 +15,7 @@ namespace Laboratory1 {
             bool UseAdvancedSearch;
 
 			while (true) {
-				Console.Write("1. Simple heuristic sudoku \t ...or 4 to get slow\n");
+                Console.Write("1. Simple heuristic sudoku \t ...or 4 to get slow\n");
 				Console.Write("2. Advanced hs \t\t\t ...or 5 to get slow\n");
 				Console.Write("3. Puzzle\n");
 				Console.Write("\nq. Exit\n");
@@ -33,6 +33,7 @@ namespace Laboratory1 {
 						sudoku(UseAdvancedSearch);
 						break;
 					case "3":
+                        puzzle();
 						break;
 					case "4":
 						UseAdvancedSearch = true;
@@ -52,12 +53,13 @@ namespace Laboratory1 {
 						Console.WriteLine("Choose between 1-3");
 						break;
 				}
+                Console.ReadKey();
+                Console.Clear();
 
-				
-
-			}
+            }
 
         }
+
 		static void sudoku(bool UseAdvancedSearch)
 		{
 			string SudokuPattern = "800030000930007000071520900005010620000050000046080300009076850060100032000040006";
@@ -90,19 +92,39 @@ namespace Laboratory1 {
 			Console.Write(data);
 			Console.Write("\n\nPress key to menu -> ");
 
-			Console.ReadKey();
-			Console.Clear();
-
+            // Cleaning
 			SudokuState.counter = 0; // tu zeruje by SudokuState.counter był taki sam za kazdym razem gdy wywołujemy opcje 1 lub 2
-
 			solutionPath = null;
 			startState = null;
 			searcher = null;
 			SudokuState.slowdown = false;
 		}
+
+
 		static void puzzle()
 		{
 
-		}
+            PuzzleState startState = new PuzzleState(3);
+            PuzzleSearch searcher = new PuzzleSearch(startState);
+
+            searcher.DoSearch();
+
+            IState state = searcher.Solutions[0];
+            List<PuzzleState> solutionPath = new List<PuzzleState>();
+
+            while (state != null)
+            {
+                solutionPath.Add((PuzzleState)state);
+                state = state.Parent;
+            }
+            solutionPath.Reverse();
+
+
+            foreach (PuzzleState s in solutionPath)
+            {
+                s.Print();
+            }
+
+        }
     }
 }

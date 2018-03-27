@@ -132,17 +132,18 @@ namespace Laboratory1
         }
 
         public void Print() {
-            string boardStates = this.id.Replace("0", " ");
-
+            StringBuilder builder = new StringBuilder();
             string output = "";
+
             for (int i = 0; i < GRID_SIZE; i++)
             {
-                output += getRowFormated(i);
+                builder.Append(getRowFormated(i));
 
-                output += ( i+1 % 3 != 0 ? "" : "\n");
+                builder.Append(i+1 % 3 != 0 ? "" : "\n");
             }
+            builder.Append("\n");
 
-            Console.Write(output + "\n");
+            Console.Write(builder.ToString());
 			if (slowdown == true)
 			{
 				Console.ReadKey();
@@ -157,15 +158,16 @@ namespace Laboratory1
                 throw new Exception("Incorrect rowID (SudokuState::getRowFormated)");
             }
 
-            string row = "\n|";
+            StringBuilder builder = new StringBuilder("\n|");
             int beginIdx = rowID * GRID_SIZE;
 
             for (int i = 0; i < SMALL_GRID_SIZE; i++)
             {
                 int cIdx = beginIdx + (i * SMALL_GRID_SIZE);
-                row += string.Format(" {0} {1} {2} |", id[cIdx], id[cIdx + 1], id[cIdx + 2]);
+                builder.Append(string.Format(" {0} {1} {2} |", id[cIdx], id[cIdx + 1], id[cIdx + 2]));
             }
-            return row.Replace("0", " ");
+            
+            return builder.ToString().Replace("0", " ");
         }
 
         #endregion

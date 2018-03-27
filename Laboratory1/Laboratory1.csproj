@@ -38,6 +38,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PuzzleSearch.cs" />
+    <Compile Include="PuzzleState.cs" />
     <Compile Include="SudokuSearch.cs" />
     <Compile Include="SudokuState.cs" />
     <Compile Include="DepthFirstSearch.cs" />
