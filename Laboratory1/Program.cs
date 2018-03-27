@@ -25,11 +25,11 @@ namespace Laboratory1 {
 				switch (choice) {
 
 					case "1":
-						UseAdvancedSearch=true;     //tutaj musiales sie pomylic bo przy true jest podstawowy a przy false adv
+						UseAdvancedSearch = false;     //tutaj musiales sie pomylic bo przy true jest podstawowy a przy false adv
 						sudoku(UseAdvancedSearch);
 						break;
 					case "2":
-						UseAdvancedSearch = false;						
+						UseAdvancedSearch = true;						
 						sudoku(UseAdvancedSearch);
 						break;
 					case "3":
@@ -86,11 +86,15 @@ namespace Laboratory1 {
 
 			string data = string.Format("{0} heuristic: \nSteps: {1}, \ncreated {2} board objects",
 				heuristicType[UseAdvancedSearch ? 0 : 1], solutionPath.Count, SudokuState.counter);
+
 			Console.Write(data);
 			Console.Write("\n\nPress key to menu -> ");
+
 			Console.ReadKey();
 			Console.Clear();
+
 			SudokuState.counter = 0; // tu zeruje by SudokuState.counter był taki sam za kazdym razem gdy wywołujemy opcje 1 lub 2
+
 			solutionPath = null;
 			startState = null;
 			searcher = null;

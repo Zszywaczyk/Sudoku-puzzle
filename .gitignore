@@ -1,5 +1,2 @@
-﻿################################################################################
-# Ten plik .gitignore został utworzony automatycznie przez Microsoft(R) Visual Studio.
-################################################################################
-
-/.vs/Laboratory1/v15/Server/sqlite3
+﻿*
+!.cs

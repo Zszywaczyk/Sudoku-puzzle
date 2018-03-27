@@ -16,6 +16,12 @@ namespace Laboratory1
         #endregion
 
 
+        #region private variables
+        private string id;
+        private int[,] table;
+
+        #endregion
+
         #region constructors
         public SudokuState(string sudokuPattern) : base()
         {
@@ -55,11 +61,6 @@ namespace Laboratory1
         #endregion
 
 
-        #region private variables
-        private string id;
-        private int[,] table;
-
-        #endregion
 
 
         #region public methods
@@ -117,7 +118,7 @@ namespace Laboratory1
                     break;
                 }
 
-                // Current index for element of small grid (=sg) on Table:
+                // Current index for element of small grid (=sg) on Table:`     i  0  1 2 3 4 5  6  7  8  9
                 int cIdx = sgBeginX + (i / SudokuState.SMALL_GRID_SIZE); // sgX + 0, 0, 0, 1, 1, 1, 2, 2, 2
                 int cIdy = sgBeginY + (i % SudokuState.SMALL_GRID_SIZE); // sgY + 0, 1, 2, 0, 1, 2, 0, 1, 2
 
@@ -137,6 +138,7 @@ namespace Laboratory1
             for (int i = 0; i < GRID_SIZE; i++)
             {
                 output += getRowFormated(i);
+
                 output += ( i+1 % 3 != 0 ? "" : "\n");
             }
 
