@@ -10,77 +10,35 @@ namespace Laboratory1
 	{
         private bool useAdvancedHeuristic;
 
-        private int numOfPossibilities;
-        private int[] xyBegin = { 0, 0 };
 
         public SudokuSearch(SudokuState state, bool advancedHeuristic = false) : base(state)
         {
             useAdvancedHeuristic = advancedHeuristic;
 
-            setBeginning(0, 0, SudokuState.GRID_SIZE);
-        }
+			state.findBeginField(useAdvancedHeuristic);
+		}
 
-        protected override void buildChildren(IState parent)
+		protected override void buildChildren(IState parent)
         {
             SudokuState state = (SudokuState)parent;
 
-            findBeginField(state);
+			state.findBeginField(useAdvancedHeuristic);
 
             for (int k = 1; k < SudokuState.GRID_SIZE + 1; k++)
             {
-                if (state.isNumberCorrect(k, xyBegin[0], xyBegin[1]))
+				//Console.Write(String.Format("k: {0}, xy({1},{2})\n", k, state.xyBegin[0], state.xyBegin[1]));
+				if (state.isNumberCorrect(k, state.xyBegin[0], state.xyBegin[1]))
                 {
-                    SudokuState child = new SudokuState(state, k, xyBegin[0], xyBegin[1]);
+                    SudokuState child = new SudokuState(state, k, state.xyBegin[0], state.xyBegin[1]);
                     parent.Children.Add(child);
-
-                    if (useAdvancedHeuristic)
-                    {
-                        setBeginning(0, 0, SudokuState.GRID_SIZE);
-                    }
-                }
+				}
             }
             return;
         }
 
-        private void findBeginField(SudokuState state)
-        {
-            for (int i = 0; i < SudokuState.GRID_SIZE; i++)
-            {
-                for (int j = 0; j < SudokuState.GRID_SIZE; j++)
-                {
-                    if (state.Table[i, j] == 0)
-                    {
-                        if (!useAdvancedHeuristic)
-                        {
-                            setBeginning(i, j, SudokuState.GRID_SIZE);
-                        }
-                        else
-                        {
-                            int possibilities = 0;
-                            for (int k = 1; k < SudokuState.GRID_SIZE + 1; k++)
-                            {
-                                if (state.isNumberCorrect(k, i, j))
-                                {
-                                    possibilities++;
-                                }
-                            }
-                            if (possibilities < numOfPossibilities)
-                            {
-                                setBeginning(i, j, possibilities);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        
 
-        private void setBeginning(int x, int y, int numOfPossibilities)
-        {
-            xyBegin[0] = x;
-            xyBegin[1] = y;
-
-            this.numOfPossibilities = numOfPossibilities;
-        }
+        
 
         protected override bool isSolution(IState state)
         {

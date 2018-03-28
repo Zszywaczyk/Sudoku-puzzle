@@ -136,7 +136,7 @@ namespace Laboratory1
 
         public void checkDirections()
         {
-            // Direction possibilities
+            // Direction possibilities x, y
             Directions_LTRB[0] = (emptyFieldPosition[0] > 0 ? true : false);
             Directions_LTRB[1] = (emptyFieldPosition[1] > 0 ? true : false);
             Directions_LTRB[2] = (emptyFieldPosition[0] < GRIDSIZE - 1 ? true : false);

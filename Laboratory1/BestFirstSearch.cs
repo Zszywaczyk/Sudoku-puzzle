@@ -120,6 +120,7 @@ namespace Laboratory1 {
         /// </summary>
         public void DoSearch() {
             IState currentState = this.initialState;
+
             while (true) {
                 if (isSolution(currentState)) {
                     solutions.Add(currentState);
@@ -132,15 +133,17 @@ namespace Laboratory1 {
                     buildChildren(currentState);
 
                     foreach (IState child in currentState.Children) {
-                        if (!this.closed.ContainsKey(child.ID) && !this.open.Contains(child)) {
-                            this.open.Insert(child);
-                        }
-                    }
+						if (!this.closed.ContainsKey(child.ID) && !this.open.Contains(child))
+						{
+							this.open.Insert(child);
+						}
+					}
                 }
 				
                 this.closed.Add(currentState.ID, currentState);
 
 				if (this.open.Count == 0) {
+					Console.Write(this.Closed[this.Closed.Count - 1].ID);
                     break;
                 }
                 else {

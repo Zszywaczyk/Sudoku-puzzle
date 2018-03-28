@@ -20,10 +20,13 @@ namespace Laboratory1
         private string id;
         private int[,] table;
 
-        #endregion
+		private int numOfPossibilities = GRID_SIZE + 1;
+		public int[] xyBegin = { 0, 0 };
 
-        #region constructors
-        public SudokuState(string sudokuPattern) : base()
+		#endregion
+
+		#region constructors
+		public SudokuState(string sudokuPattern) : base()
         {
             if (sudokuPattern.Length != (GRID_SIZE * GRID_SIZE))
             {
@@ -130,20 +133,36 @@ namespace Laboratory1
             }
             return isCorrect;
         }
+		 
+		private string getLine()
+		{
+			String temp = new String('=', 25);
+			return temp;
+		}
 
-        public void Print() {
+		public void Print() {
             StringBuilder builder = new StringBuilder();
             //string output = "";
 
             for (int i = 0; i < GRID_SIZE; i++)
             {
-                builder.Append(getRowFormated(i));
+				if (i == 0 || (i) % 3 == 0)
+				{
+					builder.Append("\n");
+					builder.Append(getLine());
+				}
+				builder.Append(getRowFormated(i));
 
-                builder.Append(i+1 % 3 != 0 ? "" : "\n");
-            }
-            builder.Append("\n");
+				builder.Append(i + 1 % 3 != 0 ? "" : "\n");
+			}
+			builder.Append("\n");
+			builder.Append(getLine());
 
-            Console.Write(builder.ToString());
+
+
+			builder.Append("\n");
+
+			Console.Write(builder.ToString());
 			if (slowdown == true)
 			{
 				Console.ReadKey();
@@ -170,6 +189,48 @@ namespace Laboratory1
             return builder.ToString().Replace("0", " ");
         }
 
-        #endregion
-    }
+		public void findBeginField(bool useAH)
+		{
+			for (int i = 0; i < SudokuState.GRID_SIZE; i++)
+			{
+				for (int j = 0; j < SudokuState.GRID_SIZE; j++)
+				{
+					if (Table[i, j] == 0)
+					{
+						if (!useAH)
+						{
+							setBeginning(i, j, SudokuState.GRID_SIZE);
+							return;
+						}
+						else
+						{
+							int possibilities = 0;
+							for (int k = 1; k < SudokuState.GRID_SIZE + 1; k++)
+							{
+								if (isNumberCorrect(k, i, j))
+								{
+									possibilities++;
+								}
+							}
+							if (possibilities < numOfPossibilities)
+							{
+								setBeginning(i, j, possibilities);
+								//Console.Write(String.Format("POOSSSS: {0}, xy({1},{2})\n", possibilities, i, j));
+							}
+						}
+					}
+				}
+			}
+		}
+
+		public void setBeginning(int x, int y, int numOfPossibilities)
+		{
+			xyBegin[0] = x;
+			xyBegin[1] = y;
+
+			this.numOfPossibilities = numOfPossibilities;
+		}
+
+		#endregion
+	}
 }
