@@ -37,12 +37,12 @@ namespace Laboratory1 {
                         puzzle();
 						break;
 					case "4":
-						UseAdvancedSearch = true;
+						UseAdvancedSearch = false;
 						SudokuState.slowdown = true;
 						sudoku(UseAdvancedSearch);
 						break;
 					case "5":
-						UseAdvancedSearch = false;
+						UseAdvancedSearch = true;
 						SudokuState.slowdown = true;
 						sudoku(UseAdvancedSearch);
 						break;
@@ -64,6 +64,10 @@ namespace Laboratory1 {
 		static void sudoku(bool UseAdvancedSearch)
 		{
 			string SudokuPattern = "800030000930007000071520900005010620000050000046080300009076850060100032000040006";
+			//"000700800000040030000009001600500000010030040005001007500200600030080090007000002";
+			//"000900002050123400030000160908000000070000090000000205091000050007439020400007000";
+
+
 			SudokuState startState = new SudokuState(SudokuPattern);
 			SudokuSearch searcher = new SudokuSearch(startState, UseAdvancedSearch);
 
@@ -91,10 +95,12 @@ namespace Laboratory1 {
 				heuristicType[UseAdvancedSearch ? 0 : 1], solutionPath.Count, SudokuState.counter);
 
 			Console.Write(data);
+			Console.Write("\nOpen: "+searcher.Open.Count);
+			Console.Write("\nClose: " + searcher.Closed.Count);
 			Console.Write("\n\nPress key to menu -> ");
 
             // Cleaning
-			SudokuState.counter = 0; // tu zeruje by SudokuState.counter był taki sam za kazdym razem gdy wywołujemy opcje 1 lub 2
+			SudokuState.counter = 0;
 			solutionPath = null;
 			startState = null;
 			searcher = null;
@@ -105,30 +111,50 @@ namespace Laboratory1 {
 		static void puzzle()
 		{
             bool useManhattan = true;
+			
+			
+			Console.Write("NxN N= ");
+			int N = Convert.ToInt32(Console.ReadLine());
+			Console.Write("Manhattan? y/n: ");
+			
+			string yesno = Console.ReadLine();
+			if (yesno == "n")
+			{
+				useManhattan = false;
+			}
+			Console.Write("How many mix: ");
+			int mix = Convert.ToInt32(Console.ReadLine());
+			Console.Write("How many boards: ");
+			int numOfRandomBoards = Convert.ToInt32(Console.ReadLine());
 
-            int openAverage = 0;
+			int openAverage = 0;
             int closeAverage = 0;
             int objectsAverage = 0;
 
-            int numOfRandomBoards = 100;
 
             PuzzleState startState;
             PuzzleSearch searcher;
 
             var stopwatch = new Stopwatch();
-
-            stopwatch.Start();
-            for (int i = 0; i < numOfRandomBoards; i++)
+			var elapsedTime = new Stopwatch();
+			var allElapsedTime = new Stopwatch();
+			
+			for (int i = 0; i < numOfRandomBoards; i++)
             {
-                startState = new PuzzleState(3, useManhattan);
+				allElapsedTime.Start();
+				stopwatch.Start();
+				startState = new PuzzleState(N, useManhattan, mix);
                 searcher = new PuzzleSearch(startState);
 
                 searcher.DoSearch();
-
+				//Console.Write(searcher.Open.Count);
+				//Console.ReadKey();
                 IState state = searcher.Solutions[0];
                 List<PuzzleState> solutionPath = new List<PuzzleState>();
 
-                int openCounter = 0;
+				stopwatch.Stop();
+				allElapsedTime.Stop();
+				int openCounter = 0;
                 while (state != null)
                 {
                     openCounter += state.Children.Count;
@@ -137,32 +163,45 @@ namespace Laboratory1 {
                     state = state.Parent;
                 }
 
-                openAverage += openCounter;
-                closeAverage += solutionPath.Count;
+                openAverage += searcher.Open.Count;
+                closeAverage += searcher.Closed.Count;
 
                 objectsAverage += PuzzleState.counter;
                 PuzzleState.counter = 0;
 
-                solutionPath = null;
-                startState = null;
-                searcher = null;
-            }
-            stopwatch.Stop();
-            var elapsedTime = stopwatch.ElapsedMilliseconds;
+				Console.WriteLine("Puzzel nr " + i);
+					foreach (PuzzleState s in solutionPath)
+					{
+						s.Print();
+					}
+				Console.WriteLine("Time: "+ stopwatch.ElapsedMilliseconds + "ms\n\n");
+				stopwatch.Reset();
+				
+
+
+				solutionPath = null;
+			}
+            
 
             openAverage /= numOfRandomBoards;
             closeAverage /= numOfRandomBoards;
             objectsAverage /= numOfRandomBoards;
 
+			
 
-            string[] methods = { "Missplaced tiles", "Manhattan" };
+			string[] methods = { "Missplaced tiles", "Manhattan" };
 
             StringBuilder datas = new StringBuilder();
             datas.Append(String.Format("{0}\n", useManhattan == false ? methods[0] : methods[1]));
             datas.Append(String.Format("Openned: {0}, Closed: {1} \nCreated {2} boards objects\n", openAverage, closeAverage, objectsAverage));
-            datas.Append(String.Format("Elapsed time: {0}\n", elapsedTime));
+            datas.Append(String.Format("Average time: {0}\n", (int)allElapsedTime.ElapsedMilliseconds/N));
 
             Console.Write(datas);
-        }
+			//Console.Write("\n"+searcher.Open.Count);
+
+			
+			startState = null;
+			searcher = null;
+		}
     }
 }

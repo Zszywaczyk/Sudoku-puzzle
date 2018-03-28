@@ -133,7 +133,7 @@ namespace Laboratory1
 
         public void Print() {
             StringBuilder builder = new StringBuilder();
-            string output = "";
+            //string output = "";
 
             for (int i = 0; i < GRID_SIZE; i++)
             {
